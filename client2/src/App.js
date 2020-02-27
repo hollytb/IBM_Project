@@ -1,4 +1,6 @@
+import 'bootstrap/dist/css/bootstrap.css';
 import React from 'react';
+import Footer from './components/Footer.js';
 import logo from './logo.svg';
 import './App.css';
 
@@ -22,8 +24,9 @@ render() {
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>{this.state.apiResponse}</p>// print response from api
+        
+        <p>{this.state.apiResponse}</p>
+      <Footer> </Footer>
       </header>
     </div>
   );
