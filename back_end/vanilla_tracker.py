@@ -112,7 +112,8 @@ if __name__ == '__main__':
         cv2.rectangle(frame, (int(roi[0]), int(roi[1])), (int(
             roi[0]+roi[2]), int(roi[1]+roi[3])), (0, 250, 0))
 
-    vidfile = input('Path to video:')
+    #vidfile = input('Path to video:')
+    vidfile = "M_03292018202006_00000000U2940605_1_001-1.MP4"
     offset_ms = 70*1000
     frames_to_process = 500
     # Open the video file and fast forward to the offset
