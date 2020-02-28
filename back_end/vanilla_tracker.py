@@ -39,7 +39,7 @@ class tracker:
         """
         rois : a list of lists. Every inner list is of the form [left, top, width, height] and denotes one roi
         init_vis : the first frame in visible light. NOTE: has to be grey scale for this tracker, so shape is (h,w)
-        agg_func : optional. The function to aggregate intensities across one roi. 
+        agg_func : optional. The function to aggregate intensities across one roi.
         spread_func : optional. This function should quantify the spread of the intensities across one roi. As an example, one could use spread_func=np.std
         """
         self.tracker = cv2.MultiTracker_create()
@@ -83,9 +83,7 @@ class tracker:
                         infra[box_to_slice(roi)]
                     )
                 )
-
-            convert_to_dict(rois, agg_intensities)
-            return rois, agg_intensities, spread_intensities
+            return rois, agg_intensities, spread_intensities, convert_to_dict(rois, agg_intensities)
 
 
 '''
@@ -96,8 +94,7 @@ is then later used to convert to a JSON file
 
 def convert_to_dict(rois, agg_intensities):
     # Creats a dictionary with associated keys
-    JSONDictionary = {'roi': 'intensity'}
-
+    JSONDictionary = {'frame_number': {'roi': 'intensity'}}
     for k in rois:  # iterates through rois list
         for j in agg_intensities:  # iterates through agg_intensities list
             # appends the roi values into the dictionary
@@ -105,7 +102,7 @@ def convert_to_dict(rois, agg_intensities):
             # appends the intensity values into the dictionary
             JSONDictionary['intensity'] = j
 
-    print(JSONDictionary)
+    return JSONDictionary
 
 
 if __name__ == '__main__':
@@ -135,10 +132,16 @@ if __name__ == '__main__':
     cv2.imshow('Visible light', vis)
     cv2.waitKey(1)
     #  loop: read new frame, collect rois, aggregated intensities and the intensities' stddev, display rois on frame
+    frame_counter = 0
+    JSONDictionary = {}
     for ii in range(frames_to_process):
         ret, frame = cap.read()
         vis, infra = stryker(frame)
-        rois, agg_intensities, spread_intensities = vanilla.update(vis, infra)
+        rois, agg_intensities, spread_intensities, JSONDictionary = vanilla.update(
+            vis, infra)
+        frame_counter += 1
+        JSONDictionary['frame_number'] = frame_counter
+        print(JSONDictionary)
         for roi in rois:
             plot_roi(roi, vis)
         cv2.imshow('Visible light', vis)
