@@ -1,1 +1,15 @@
 /*Styling here if not possibly through bootstrap*/
+body{
+  height: 100%;
+  background-color: #194d33;
+}
+/* switch to turn of multiple region selection */
+#customSwitches{
+
+}
+/* checkbox's in relation to regions */
+.region{
+  margin: 0 5px 0 5px;
+}
+
+
