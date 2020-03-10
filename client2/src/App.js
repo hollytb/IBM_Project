@@ -2,7 +2,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 import React from 'react';
 
 import Buttons_Footer from './components/Buttons_Footer.js';
-
+import LeftPane from './components/LeftPane.js';
 //import './App.css';
 
 class App extends React.Component{
@@ -32,6 +32,7 @@ render() {
         <p>{this.state.apiResponse}</p>
       
       <Buttons_Footer></Buttons_Footer>
+      <LeftPane></LeftPane>
 
       </header>
     </div>
