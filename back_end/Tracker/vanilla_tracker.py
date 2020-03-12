@@ -16,6 +16,7 @@ limitations under the License.
 
 import cv2
 import numpy as np
+import json
 
 # Constants
 # Locations of the visible light and infrared panels in the full frame provided by the Stryker Pinpoint system
@@ -104,6 +105,11 @@ def convert_to_dict(rois, agg_intensities):
 
     return JSONDictionary
 
+def convert_to_JSON_file(JSONDictionary):
+    with open("Output.json", "a") as f :
+     f.write(",%s\n" % (JSONDictionary))
+     f.close()
+
 
 if __name__ == '__main__':
 
@@ -112,6 +118,7 @@ if __name__ == '__main__':
         cv2.rectangle(frame, (int(roi[0]), int(roi[1])), (int(
             roi[0]+roi[2]), int(roi[1]+roi[3])), (0, 250, 0))
 
+    open('Output.json', 'w').close()
     #vidfile = input('Path to video:')
     vidfile = "M_03292018202006_00000000U2940605_1_001-1.MP4"
     offset_ms = 70*1000
@@ -142,8 +149,10 @@ if __name__ == '__main__':
             vis, infra)
         frame_counter += 1
         JSONDictionary['frame_number'] = frame_counter
-        print(JSONDictionary.keys())
+        print(JSONDictionary)
+        convert_to_JSON_file(JSONDictionary)
         for roi in rois:
             plot_roi(roi, vis)
         cv2.imshow('Visible light', vis)
         cv2.waitKey(1)
+
