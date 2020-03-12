@@ -16,4 +16,4 @@ else:
 JsonDictionary = {}
 for i, d in enumerate(x):
     JsonDictionary[f"dict{i}"] = d
-print(JsonDictionary['dict3']['roi_number'])
+print(JsonDictionary.keys())
