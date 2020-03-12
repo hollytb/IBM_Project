@@ -1,7 +1,7 @@
 import $ from "jquery";
 import React, { Component } from 'react';
-import { MDBCol, MDBBtn , MDBContainer, MDBRow, MDBFooter,MDBFormInline, MDBInput } from 'mdbreact';
-
+import { MDBFormInline } from 'mdbreact';
+import { Container, Row, Col } from 'reactstrap';
 // Footer Component with checkbox's used to select region/region's of interest 
 class Buttons_Footer extends Component {
 
@@ -23,10 +23,7 @@ $("#customSwitches").click(function(e){ // Multiply regions able to be selected
 
   render() {
     return (
-      <div class = "container">
-      <MDBFooter color="mdb-color" className="fixed-bottom offset-md-3">
-        <MDBContainer className="text-center text-md-left">
-          <MDBRow className="text-center text-md-left ">
+      <Container class = "container offset-md-3" > 
             <div className='custom-control custom-switch' >
             <input type='checkbox' className='custom-control-input' id='customSwitches' />
             <label  className='custom-control-label' htmlFor='customSwitches'>
@@ -115,10 +112,7 @@ $("#customSwitches").click(function(e){ // Multiply regions able to be selected
                 <label for="region40"> 40</label>
              </MDBFormInline>
             </div>      
-          </MDBRow>
-        </MDBContainer>
-      </MDBFooter>
-    </div>
+    </Container>
     );
   }
 }

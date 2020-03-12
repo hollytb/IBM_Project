@@ -2,20 +2,24 @@
 body{
   height: 100%;
   background-color: #194d33;
+  overflow:hidden;
 }
 /* switch to turn of multiple region selection */
 #customSwitches{
-
 }
 /* checkbox's in relation to regions */
 .region{
   margin: 0 5px 0 5px;
 }
+
 .leftpane{
-  background-color: #194d33;;
+  background-color: #FFFACD;
+  position: absolute;
 }
-.slide-in-left {
-	-webkit-animation: slide-in-left 0.8s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
-	        animation: slide-in-left 0.8s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+/* Footer */
+.container{ 
+  background-color: #7B68EE;
+
 }
+
 

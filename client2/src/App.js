@@ -3,6 +3,7 @@ import React from 'react';
 
 import Buttons_Footer from './components/Buttons_Footer.js';
 import LeftPane from './components/LeftPane.js';
+
 //import './App.css';
 
 class App extends React.Component{
@@ -23,17 +24,19 @@ class App extends React.Component{
     this.callAPI();
   }
 render() {
-  const greeting = 'Welcome to React';
 
   return (
     <div className="App">
       <header className="App-header">
-        
         <p>{this.state.apiResponse}</p>
-      
-      <Buttons_Footer></Buttons_Footer>
-      <LeftPane></LeftPane>
-
+        <div class="row fixed-bottom no-gutters">
+          <div class="col-3 fixed-top fixed-bottom">
+              <LeftPane></LeftPane>
+          </div>
+          <div class="offset-md-3" >
+              <Buttons_Footer></Buttons_Footer>
+          </div>
+       </div>
       </header>
     </div>
   );
