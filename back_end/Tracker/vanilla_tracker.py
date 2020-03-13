@@ -98,7 +98,7 @@ def convert_to_dict(rois, agg_intensities):
         # iterates through agg_intensities list
         for i, intensity_value in enumerate(agg_intensities):
             # appends the intensity values into the dictionary
-            JSONDictionary[f'roi{i}'] = roi_value
+            JSONDictionary[f'roi{i}'] = list(roi_value)
             JSONDictionary[f'intensity{i}'] = intensity_value
 
     return JSONDictionary
@@ -118,8 +118,8 @@ if __name__ == '__main__':
             roi[0]+roi[2]), int(roi[1]+roi[3])), (0, 250, 0))
 
     open('Output.json', 'w').close()
-    vidfile = input('Path to video:')
-    #vidfile = "M_03292018202006_00000000U2940605_1_001-1.MP4"
+    #vidfile = input('Path to video:')
+    vidfile = "M_03292018202006_00000000U2940605_1_001-1.MP4"
     offset_ms = 70*1000
     frames_to_process = 500
     # Open the video file and fast forward to the offset
