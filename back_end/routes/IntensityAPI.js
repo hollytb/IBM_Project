@@ -1,7 +1,8 @@
 var express = require("express");
 var router = express.Router();
+const { spawn } = require("child_process");
 //Path to the JSON file when created
-const jsonFilePath = "./Tracker/sample-request.json";
+const jsonFilePath = "./Tracker/Output.json";
 const fs = require("fs");
 
 //This method reads the file
@@ -31,6 +32,11 @@ router.get("/", function(req, res) {
   });
 });
 
-//Make a method POST API
+// // CREATE
+// router.post("/framenumber", (req, res) => {
+//   readFile(data => {
+//     const framenumber = Object.keys(data).length + 1;
+//   }, true);
+// });
 
 module.exports = router;
