@@ -96,19 +96,21 @@ is then later used to convert to a JSON file
 def convert_to_dict(rois, agg_intensities):
     # Creates a dictionary with associated keys
     JSONDictionary = {'frame_number': {'roi': 'intensity'}}
-    for roi_value in rois:  # iterates through rois list
-        for intensity_value in agg_intensities:  # iterates through agg_intensities list
-            # appends the roi values into the dictionary
-            JSONDictionary['roi'] = roi_value
-            # appends the intensity values into the dictionary
-            JSONDictionary['intensity'] = intensity_value
+    for i, roi_value in enumerate(rois):  # iterates through rois list
+        # iterates through agg_intensities list
 
+        # appends the roi values into the dictionary
+        JSONDictionary[f'roi{i}'] = roi_value
+        for j, intensity_value in enumerate(agg_intensities):
+            # appends the intensity values into the dictionary
+            JSONDictionary[f'intensity{j}'] = intensity_value
     return JSONDictionary
 
+
 def convert_to_JSON_file(JSONDictionary):
-    with open("Output.json", "a") as f :
-     f.write(",%s\n" % (JSONDictionary))
-     f.close()
+    with open("Output.json", "a") as f:
+        f.write(",%s\n" % (JSONDictionary))
+        f.close()
 
 
 if __name__ == '__main__':
@@ -149,10 +151,9 @@ if __name__ == '__main__':
             vis, infra)
         frame_counter += 1
         JSONDictionary['frame_number'] = frame_counter
-        print(JSONDictionary)
+        print(f"\n{JSONDictionary}")
         convert_to_JSON_file(JSONDictionary)
         for roi in rois:
             plot_roi(roi, vis)
         cv2.imshow('Visible light', vis)
         cv2.waitKey(1)
-
