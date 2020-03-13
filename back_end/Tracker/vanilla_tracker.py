@@ -10,7 +10,7 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 """
-
+import os
 import cv2
 import numpy as np
 import json
@@ -106,7 +106,7 @@ def convert_to_dict(rois, agg_intensities):
 
 def convert_to_JSON_file(JSONDictionary):
     with open("Output.json", "a") as f:
-        f.write(",%s\n" % (JSONDictionary))
+        f.write("%s,\n" % (JSONDictionary))
         f.close()
 
 
@@ -141,6 +141,8 @@ if __name__ == '__main__':
     #  loop: read new frame, collect rois, aggregated intensities and the intensities' stddev, display rois on frame
     frame_counter = 0
     JSONDictionary = {}
+    with open("Output.json", "a") as f:
+        f.write("[")
     for ii in range(frames_to_process):
         ret, frame = cap.read()
         vis, infra = stryker(frame)
@@ -155,3 +157,8 @@ if __name__ == '__main__':
             plot_roi(roi, vis)
         cv2.imshow('Visible light', vis)
         cv2.waitKey(1)
+    with open("Output.json", 'rb+') as f:
+        f.seek(-2, os.SEEK_END)
+        f.truncate()
+    with open("Output.json", "a") as f:
+        f.write("]")
