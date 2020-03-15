@@ -1,8 +1,5 @@
-/*const path = require("path");
-const { spawn } = require("child_process");
-const pythonProcess = spawn("python", ["Tracker/vanilla_tracker.py", arg1]);*/
-
-var express = require("express");
-var app = express();
-var spawn = require("child_process").spawn;
-var process = spawn("python", ["./Tracker/vanilla_tracker.py"]);
+const spawn = require("child_process").spawn;
+const process = spawn("python", ["./vanilla_tracker.py"]);
+process.stdout.on("data", data => {
+  console.log(data.toString());
+});
