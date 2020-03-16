@@ -112,6 +112,7 @@ def convert_to_dict(rois, agg_intensities):
 
 def convert_to_JSON_file(JSONDictionary):
     with open("Output.json", "a") as f:
+        JSONDictionary = json.dumps(JSONDictionary)
         f.write("%s,\n" % (JSONDictionary))
         f.close()
 
@@ -164,7 +165,7 @@ if __name__ == '__main__':
         cv2.imshow('Visible light', vis)
         cv2.waitKey(1)
     with open("Output.json", 'rb+') as f:
-        f.seek(-2, os.SEEK_END)
+        f.seek(-3, os.SEEK_END)
         f.truncate()
     with open("Output.json", "a") as f:
         f.write("]")
