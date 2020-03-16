@@ -6,6 +6,7 @@ var logger = require("morgan");
 var cors = require("cors");
 
 var IntensityAPIRouter = require("./routes/IntensityAPI");
+var indexAPIRouter = require("./routes/index");
 var app = express();
 
 // view engine setup
@@ -20,6 +21,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/IntensityAPI", IntensityAPIRouter);
+app.use("/", indexAPIRouter);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
