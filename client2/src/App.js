@@ -1,8 +1,12 @@
 import "bootstrap/dist/css/bootstrap.css";
 import React from "react";
+import ReactPlayer from 'react-player'
+
 
 import Buttons_Footer from "./components/Buttons_Footer.js";
 import LeftPane from "./components/LeftPane.js";
+import Video from "./components/Video.js";
+
 
 //import './App.css';
 
@@ -35,8 +39,10 @@ class App extends React.Component {
             <div class="offset-md-3">
               <Buttons_Footer></Buttons_Footer>
             </div>
+           
           </div>
         </header>
+        <Video></Video>
       </div>
     );
   }
