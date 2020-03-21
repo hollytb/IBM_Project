@@ -21,3 +21,15 @@ ReactDOM.render(<App />, document.getElementById('root'));
 // unregister() to register() below. Note this comes with some pitfalls.
 // Learn more about service workers: https://bit.ly/CRA-PWA
 //serviceWorker.unregister();
+
+/*<ul>
+{this.state.apiResponse.map((frame)=>{
+  return <showButtons frameNumber = {frame.frame_number} />
+})}
+</ul>
+   <ul>
+       {filteredKeys.map(item => {
+         return <li>{item[1]}</li>;
+       })}
+      </ul>
+*/

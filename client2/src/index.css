@@ -2,7 +2,7 @@
 body{
   height: 100%;
   background-color: #194d33;
-  overflow:hidden;
+  overflow: hidden;
 }
 /* switch to turn of multiple region selection */
 #customSwitches{
@@ -16,10 +16,14 @@ body{
   background-color: #FFFACD;
   position: absolute;
 }
+.react-player {
+  position: absolute;
+}
 /* Footer */
 .container{ 
   background-color: #7B68EE;
 
+  
 }
 
 

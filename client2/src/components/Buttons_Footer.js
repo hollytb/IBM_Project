@@ -2,8 +2,17 @@ import $ from "jquery";
 import React, { Component } from 'react';
 import { MDBFormInline } from 'mdbreact';
 import { Container, Row, Col } from 'reactstrap';
+import Radio_Button from "./Radio_Button.js";
 // Footer Component with checkbox's used to select region/region's of interest 
+/*
+const Keys = props => ( {props.current_frame}.map(frame => Object.keys(frame))
+);
+const filteredKeys = (props) =>{ keys.map(frame => frame.filter(key => new RegExp(/^roi\d+$/).test(key)))}
+const showButtons = () => {
+return filteredKeys.map(frame => frame.map(roi => <input class="region" type="checkbox"/>))
+} */
 class Buttons_Footer extends Component {
+  
 
   // Enables the Functionality of the "Select Multiple Region's" switch using jquerys
   componentDidMount() {
@@ -20,15 +29,29 @@ $("#customSwitches").click(function(e){ // Multiply regions able to be selected
    $(".region").prop('checked', false);
 }); }
   
-
+//  <Keys current_frame = {this.props.frame}/>
+//<p>{this.props.region.roi0}</p>
   render() {
+  
+
     return (
-      <Container class = "container offset-md-3" > 
+      
+      
+      <Container class = "container"   width='100%'
+        height='100%'> 
+  
             <div className='custom-control custom-switch' >
             <input type='checkbox' className='custom-control-input' id='customSwitches' />
             <label  className='custom-control-label' htmlFor='customSwitches'>
+            
                  Select Multiple Region's
             </label> 
+            
+            
+          
+          
+        
+          // For each frame, want the listed region's of interests, for each one display a radio button.
               <MDBFormInline>
                 <input class="region" type="checkbox" name="region1" value="1" />
                 <label for="region1"> 1</label>
