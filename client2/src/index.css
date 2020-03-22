@@ -9,7 +9,8 @@ body{
 }
 /* checkbox's in relation to regions */
 .region{
-  margin: 0 5px 0 5px;
+  clear: none;
+   width: auto;
 }
 
 .leftpane{
@@ -23,7 +24,8 @@ body{
 .container{ 
   background-color: #7B68EE;
 
-  
 }
+
+
 
 

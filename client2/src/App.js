@@ -2,13 +2,9 @@
 import "bootstrap/dist/css/bootstrap.css";
 import React from "react";
 import ReactPlayer from 'react-player'
-
-
-import Buttons_Footer from "./components/Buttons_Footer.js";
 import LeftPane from "./components/LeftPane.js";
 import Video from "./components/Video.js";
-import Radio_Button from "./components/Radio_Button.js";
-import Test from "./components/test.js";
+import Footer from "./components/Footer.js";
 //import './App.css';
 
 class App extends React.Component {
@@ -27,34 +23,21 @@ class App extends React.Component {
     this.callAPI();
   }
   
-
   render() {
     return (
       <div className="App">
-        
-        
-          <div class="row fixed-top fixed-bottom" >
+          <div class="row fixed-top fixed-bottom no-gutters"  >
             <div class="col-3 fixed-top fixed-bottom">
               <LeftPane></LeftPane>
             </div>
             <div class="offset-md-3 fixed-top fixed-bottom" >
-            <Video></Video>
+              <Video></Video>
             </div>
+            <div class=" col-3 fixed-bottom">
+            <Footer test = {this.state.apiResponse}/>
+            </div>      
             </div>
-            <div class ="row">
-            <div class="offset-md-3 fixed-bottom">
-              <Buttons_Footer></Buttons_Footer>
-            </div>
-            </div>
-            <div class ="row  fixed-bottom">
-            <div class="offset-md-3 fixed-top ">
-            
-          </div>
-          </div>
-        <Test test = {this.state.apiResponse}/>
-        
-        
-        
+          
       </div>
     );
   }
