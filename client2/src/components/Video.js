@@ -1,5 +1,9 @@
 import React, { Component } from 'react'
 import ReactPlayer from 'react-player'
+import myVideo from "C:/Users/alans/Desktop/ibm_project/client2/src/video.mp4"
+
+
+
 
 class Video extends Component {
     render () {
@@ -7,9 +11,11 @@ class Video extends Component {
         <div className='player-wrapper'>
           <ReactPlayer
             className='react-player fixed-bottom'
-            url='https://www.youtube.com/watch?v=ysz5S6PUM-U'
+            url= {myVideo}
             width='100%'
-            height='100%'
+            height='110%'
+            controls = {true}
+             
           />
         </div>
       )
