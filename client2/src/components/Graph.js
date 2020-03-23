@@ -16,7 +16,7 @@ class Graph extends Component{
 
  componentDidMount() {
     this.interval = setInterval(() => { 
-      if(this.di++ < 500) this.d2.push(this.allData[this.di])
+      if(this.di++ < this.jData.length) this.d2.push(this.allData[this.di])
       else clearInterval(this.interval) 
       this.setState({ data: this.d2 })
     }, 500);
