@@ -5,19 +5,35 @@ import { jsonData } from './Output.js'
 
 class Graph extends Component{
 
-  getData(){
-    let d1 = JSON.parse(jsonData), d2 = [[ 'Frame', 'roi1', 'roi2' ]]
-    for(let o of d1) d2.push([ o.frame_number, o.intensity0, o.intensity1 ])
-    return d2;
+  constructor(){
+    super()
+    this.jData = JSON.parse(jsonData)
+    this.allData = this.jData.map( o => [ o.frame_number, o.intensity0, o.intensity1 ])
+    this.d2 = [[ 'Frame', 'Int-0', 'Int-1' ], [1,1,1]] 
+    this.di = 0
+    this.state = { data: this.d2 }
+  }
+
+ componentDidMount() {
+    this.interval = setInterval(() => { 
+      if(this.di++ < 500) this.d2.push(this.allData[this.di])
+      else clearInterval(this.interval) 
+      this.setState({ data: this.d2 })
+    }, 500);
+  }
+  
+  componentWillUnmount() {
+    clearInterval(this.interval);
+
   }
 
   render(){
     return(
       <Chart
         width='100%'
-        height='420px'
+        height='400px'
         chartType='LineChart'
-        data={ this.getData() }
+        data={ this.state.data }
         options={{ 
           hAxis: { title: 'Frame' }, 
           vAxis: { title: 'Intensity' },
@@ -28,6 +44,4 @@ class Graph extends Component{
   }
 
 }
-
 export default Graph;
-//render(<Graph/>, document.getElementById('root'))
