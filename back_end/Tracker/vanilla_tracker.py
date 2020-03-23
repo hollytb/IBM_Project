@@ -14,6 +14,7 @@ import os
 import cv2
 import numpy as np
 import json
+import sys
 
 # Constants
 # Locations of the visible light and infrared panels in the full frame provided by the Stryker Pinpoint system
@@ -90,31 +91,37 @@ is then later used to convert to a JSON file
 '''
 
 
-def convert_to_dict(rois, agg_intensities):
+def convert_to_dict(rois, agg_intensities, spread_intensities):
     # Creates a dictionary with associated keys
-    JSONDictionary = {'frame_number': {'roi': 'intensity'}}
+    JSONDictionary = {'frame_number': {
+        'roi': {'intensity', 'spread_intensity'}}}
 
     for i, roi_value in enumerate(rois):  # iterates through rois list
         # iterates through agg_intensities list
         for i, intensity_value in enumerate(agg_intensities):
-            # appends the intensity values into the dictionary
-            JSONDictionary[f'roi{i}'] = list(roi_value)
-            try:
-                if np.isnan(intensity_value):
-                    JSONDictionary[f'intensity{i}'] = -1
-                else:
-                    JSONDictionary[f'intensity{i}'] = intensity_value
-            except Exception as identifier:
-                print(identifier)
+            for i, spread_value in enumerate(spread_intensities):
+                # appends the intensity values into the dictionary
+                JSONDictionary[f'roi{i}'] = list(roi_value)
+                try:
+                    if np.isnan(intensity_value) or np.isnan(spread_value):
+                        JSONDictionary[f'intensity{i}'] = -1
+                        JSONDictionary[f'spread_intensity{i}'] = -1
+                    else:
+                        JSONDictionary[f'intensity{i}'] = intensity_value
+                        JSONDictionary[f'spread_intensity{i}'] = spread_value
+                except Exception as identifier:
+                    print(identifier)
 
     return JSONDictionary
 
 
 def convert_to_JSON_file(JSONDictionary):
-    with open("Output.json", "a") as f:
+    file_name = "Output.json"
+    with open(file_name, "a") as f:
         JSONDictionary = json.dumps(JSONDictionary)
         f.write("%s,\n" % (JSONDictionary))
         f.close()
+    return f
 
 
 if __name__ == '__main__':
@@ -125,8 +132,8 @@ if __name__ == '__main__':
             roi[0]+roi[2]), int(roi[1]+roi[3])), (0, 250, 0))
 
     open('Output.json', 'w').close()
-    # vidfile = input('Path to video:')
-    vidfile = "M_03292018202006_00000000U2940605_1_001-1.MP4"
+    vidfile = input('Path to video:')
+    # vidfile = "M_03292018202006_00000000U2940605_1_001-1.MP4"
     offset_ms = 70*1000
     frames_to_process = 500
     # Open the video file and fast forward to the offset
@@ -148,6 +155,7 @@ if __name__ == '__main__':
     #  loop: read new frame, collect rois, aggregated intensities and the intensities' stddev, display rois on frame
     frame_counter = 0
     JSONDictionary = {}
+    # json_file
     with open("Output.json", "a") as f:
         f.write("[")
     for ii in range(frames_to_process):
@@ -156,10 +164,11 @@ if __name__ == '__main__':
         rois, agg_intensities, spread_intensities = vanilla.update(
             vis, infra)
         frame_counter += 1
-        JSONDictionary = convert_to_dict(rois, agg_intensities)
+        JSONDictionary = convert_to_dict(
+            rois, agg_intensities, spread_intensities)
         JSONDictionary['frame_number'] = frame_counter
         print(f"\n{JSONDictionary}")
-        convert_to_JSON_file(JSONDictionary)
+        json_file = convert_to_JSON_file(JSONDictionary)
         for roi in rois:
             plot_roi(roi, vis)
         cv2.imshow('Visible light', vis)
