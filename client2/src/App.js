@@ -5,6 +5,7 @@ import ReactPlayer from 'react-player'
 import LeftPane from "./components/LeftPane.js";
 import Video from "./components/Video.js";
 import Footer from "./components/Footer.js";
+
 //import './App.css';
 
 class App extends React.Component {
