@@ -1,5 +1,6 @@
 import React from "react";
 import { MDBFormInline } from 'mdbreact';
+import { MDBBtn } from "mdbreact";
 import { Container } from 'reactstrap';
 import $ from "jquery";
   const Footer = props => {
@@ -45,13 +46,13 @@ import $ from "jquery";
     <div className='custom-control custom-switch' >
     <input type='checkbox' className='custom-control-input' id='customSwitches' />
     <label  className='custom-control-label' htmlFor='customSwitches'>
-         Multiple Region's
+      <p className="font-weight-bold">   Multiple Region's </p>
     </label> 
     </div>
       <div>
-      <button onClick={() => setCurrentFrame(0)}>
+      <MDBBtn color="blue-grey" size="sm" variant="link"  onClick={() => setCurrentFrame(0)}>
         reset
-      </button>
+      </MDBBtn>
       </div>
       {currentFrame >= frames.length
         ? null

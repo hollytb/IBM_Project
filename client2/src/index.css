@@ -1,7 +1,7 @@
 /*Styling here if not possibly through bootstrap*/
 body{
   height: 100%;
-  background-color: #194d33;
+  background-color: #FFFFFF;
   overflow: hidden;
 }
 /* switch to turn of multiple region selection */
@@ -14,7 +14,7 @@ body{
 }
 
 .leftpane{
-  background-color: #FFFACD;
+  background-color: #FFFFFF;
   position: absolute;
 }
 .react-player {
@@ -22,7 +22,7 @@ body{
 }
 /* Footer */
 .container{ 
-  background-color: #7B68EE;
+  background-color: #FFFFFF;
 
 }
 
