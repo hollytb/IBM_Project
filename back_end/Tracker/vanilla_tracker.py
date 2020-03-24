@@ -82,37 +82,29 @@ class tracker:
                         infra[box_to_slice(roi)]
                     )
                 )
+
             return rois, agg_intensities, spread_intensities
 
+    def norm_time_series(self, rois, agg_intensities, spread_intensities):
+        intensities = []
+        for average, stand_dev in zip(agg_intensities, spread_intensities):
+            try:
+                if np.isnan(average) or np.isnan(stand_dev):
+                    intensities.append([-1, -1, -1])
+                else:
+                    intensities.append(
+                        [average, average-stand_dev, average+stand_dev])
+            except Exception as identifier:
+                print(identifier)
 
-'''
-This function adds the data of frame,rois,agg_intensities into a Dict,which
-is then later used to convert to a JSON file
-'''
+        return intensities
 
-
-def convert_to_dict(rois, agg_intensities, spread_intensities):
-    # Creates a dictionary with associated keys
-    JSONDictionary = {'frame_number': {
-        'roi': {'intensity', 'spread_intensity'}}}
-
-    for i, roi_value in enumerate(rois):  # iterates through rois list
-        # iterates through agg_intensities list
-        for i, intensity_value in enumerate(agg_intensities):
-            for i, spread_value in enumerate(spread_intensities):
-                # appends the intensity values into the dictionary
-                JSONDictionary[f'roi{i}'] = list(roi_value)
-                try:
-                    if np.isnan(intensity_value) or np.isnan(spread_value):
-                        JSONDictionary[f'intensity{i}'] = -1
-                        JSONDictionary[f'spread_intensity{i}'] = -1
-                    else:
-                        JSONDictionary[f'intensity{i}'] = intensity_value
-                        JSONDictionary[f'spread_intensity{i}'] = spread_value
-                except Exception as identifier:
-                    print(identifier)
-
-    return JSONDictionary
+    def convert_to_dict(self, rois, agg_intensities, spread_intensities):
+        intensities = self.norm_time_series(
+            rois, agg_intensities, spread_intensities)
+        roi = list()
+        j = 0
+        for i, intensity_value in enumerate(intensities):
 
 
 def convert_to_JSON_file(JSONDictionary):
@@ -156,25 +148,21 @@ if __name__ == '__main__':
     frame_counter = 0
     JSONDictionary = {}
     # json_file
-    with open("Output.json", "a") as f:
-        f.write("[")
+    # with open("Output.json", "a") as f:
+    #     f.write("[")
     for ii in range(frames_to_process):
         ret, frame = cap.read()
         vis, infra = stryker(frame)
-        rois, agg_intensities, spread_intensities = vanilla.update(
-            vis, infra)
-        frame_counter += 1
-        JSONDictionary = convert_to_dict(
+        rois, agg_intensities, spread_intensities = vanilla.update(vis, infra)
+        intensity = vanilla.convert_to_dict(
             rois, agg_intensities, spread_intensities)
-        JSONDictionary['frame_number'] = frame_counter
-        print(f"\n{JSONDictionary}")
-        json_file = convert_to_JSON_file(JSONDictionary)
+
         for roi in rois:
             plot_roi(roi, vis)
         cv2.imshow('Visible light', vis)
         cv2.waitKey(1)
-    with open("Output.json", 'rb+') as f:
-        f.seek(-3, os.SEEK_END)
-        f.truncate()
-    with open("Output.json", "a") as f:
-        f.write("]")
+    # with open("Output.json", 'rb+') as f:
+    #     f.seek(-3, os.SEEK_END)
+    #     f.truncate()
+    # with open("Output.json", "a") as f:
+    #     f.write("]")
