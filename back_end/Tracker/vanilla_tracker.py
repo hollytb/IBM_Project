@@ -126,7 +126,6 @@ if __name__ == '__main__':
     open('Output.json', 'w').close()
     # vidfile = input('Path to video:')
     vidfile = os.path.abspath("M_03292018202006_00000000U2940605_1_001-1.MP4")
-    print(f"videfile = {vidfile}\n")
     offset_ms = 70*1000
     frames_to_process = 500
     # Open the video file and fast forward to the offset
