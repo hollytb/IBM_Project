@@ -99,12 +99,12 @@ class tracker:
 
         return intensities
 
-    def convert_to_dict(self, rois, agg_intensities, spread_intensities):
-        intensities = self.norm_time_series(
-            rois, agg_intensities, spread_intensities)
-        roi = list()
-        j = 0
-        for i, intensity_value in enumerate(intensities):
+    # def convert_to_dict(self, rois, agg_intensities, spread_intensities):
+    #     intensities = self.norm_time_series(
+    #         rois, agg_intensities, spread_intensities)
+    #     roi = list()
+    #     j = 0
+    #     for i, intensity_value in enumerate(intensities):
 
 
 def convert_to_JSON_file(JSONDictionary):
@@ -154,8 +154,9 @@ if __name__ == '__main__':
         ret, frame = cap.read()
         vis, infra = stryker(frame)
         rois, agg_intensities, spread_intensities = vanilla.update(vis, infra)
-        intensity = vanilla.convert_to_dict(
+        intensity = vanilla.norm_time_series(
             rois, agg_intensities, spread_intensities)
+        print(intensity)
 
         for roi in rois:
             plot_roi(roi, vis)
