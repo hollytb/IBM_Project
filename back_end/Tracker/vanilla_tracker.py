@@ -58,6 +58,7 @@ class tracker:
         spread_intensities : if tracker.spread_func is set (i.e. is not None), then the third output is a list of the same length as agg_intensities, containing the result of tracker.spread_func evaluted on each roi
         """
         succ, rois = self.tracker.update(vis)
+
         if not succ:
             print('[Warning]: at least one ROI was not detected')
         agg_intensities = []
@@ -99,21 +100,31 @@ class tracker:
 
         return intensities
 
-    # def convert_to_dict(self, rois, agg_intensities, spread_intensities):
-    #     intensities = self.norm_time_series(
-    #         rois, agg_intensities, spread_intensities)
-    #     roi = list()
-    #     j = 0
-    #     for i, intensity_value in enumerate(intensities):
+
+def parse_json_data(json_input_file_name):
+    f = open(json_input_file_name)
+    json_input = json.load(f)
+    return json_input
 
 
-def convert_to_JSON_file(JSONDictionary):
-    file_name = "Output.json"
-    with open(file_name, "a") as f:
-        JSONDictionary = json.dumps(JSONDictionary)
-        f.write("%s,\n" % (JSONDictionary))
+def convert_to_JSON_file(input_data0, input_data1):
+    file_name = os.path.abspath("Output.json")
+    with open(file_name, "w") as f:
+        input0 = json.dumps(input_data0)
+        input1 = json.dumps(input_data1)
+        f.write(f"[{input0}, {input1}]")
         f.close()
     return f
+
+
+def create_JSON_output(roi_number):
+    output = {"short_name": "Demo", "roi_number": roi_number, "finding": "null",
+              "dt": 0.1, "norm_times_series": [], "initial_location": [rois0[roi_number]]}
+    for i, value in enumerate(norm_time_series_list):
+        if i % 2 == 0:
+            output["norm_times_series"].append(
+                norm_time_series_list[i][roi_number])
+    return output
 
 
 if __name__ == '__main__':
@@ -123,7 +134,6 @@ if __name__ == '__main__':
         cv2.rectangle(frame, (int(roi[0]), int(roi[1])), (int(
             roi[0]+roi[2]), int(roi[1]+roi[3])), (0, 250, 0))
 
-    open('Output.json', 'w').close()
     # vidfile = input('Path to video:')
     vidfile = os.path.abspath("M_03292018202006_00000000U2940605_1_001-1.MP4")
     offset_ms = 70*1000
@@ -145,25 +155,34 @@ if __name__ == '__main__':
     cv2.imshow('Visible light', vis)
     cv2.waitKey(1)
     #  loop: read new frame, collect rois, aggregated intensities and the intensities' stddev, display rois on frame
-    frame_counter = 0
-    JSONDictionary = {}
-    # json_file
-    # with open("Output.json", "a") as f:
-    #     f.write("[")
+    norm_time_series_list = []
+    json_output = {}
+    json_input_file_name = os.path.abspath(
+        "TCD_example_json_values_input.json")
+
+    json_input = parse_json_data(json_input_file_name)
+
     for ii in range(frames_to_process):
         ret, frame = cap.read()
         vis, infra = stryker(frame)
         rois, agg_intensities, spread_intensities = vanilla.update(vis, infra)
         intensity = vanilla.norm_time_series(
             rois, agg_intensities, spread_intensities)
-        print(intensity)
+        norm_time_series_list.append(intensity)
 
         for roi in rois:
             plot_roi(roi, vis)
         cv2.imshow('Visible light', vis)
         cv2.waitKey(1)
-    # with open("Output.json", 'rb+') as f:
-    #     f.seek(-3, os.SEEK_END)
-    #     f.truncate()
-    # with open("Output.json", "a") as f:
-    #     f.write("]")
+    roi_number0 = create_JSON_output(0)
+    roi_number1 = create_JSON_output(1)
+    convert_to_JSON_file(roi_number0, roi_number1)
+    # this creates the output json when reading in the input json
+    # for i, value in enumerate(json_input["ROIs"]):
+    #     json_output[f"short_name{i}"] = json_input["short_name"]
+    #     json_output[f"roi_number{i}"] = json_input["ROIs"][i]["number"]
+    #     json_output[f"finding{i}"] = "null"
+    #     json_output[f"dt{i}"] = 0.1
+    #     json_output[f"norm_time_series{i}"] = []
+    #     json_output[f"initial_location{i}"] = json_input["ROIs"][i]["location"]
+    # print(json.dumps(json_output, indent=4, sort_keys=True))
