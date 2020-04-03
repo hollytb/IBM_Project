@@ -4,7 +4,7 @@ import myVideo from "C:/Third_Year/IBM_project/ibm/client2/src/video.mp4"
 
 
 
-
+//video display
 class Video extends Component {
     render () {
       return (
