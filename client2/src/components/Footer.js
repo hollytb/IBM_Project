@@ -37,6 +37,16 @@ import $ from "jquery";
       }
   });
   
+    //Enables functionality of "Select only one ROI" as default
+
+
+
+
+
+
+
+    
+
 
   $("#customSwitches").click(function(e){ // Multiple regions of interest able to be selected
      $(".region").prop('checked', false);
