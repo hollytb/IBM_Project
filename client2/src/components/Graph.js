@@ -7,25 +7,17 @@ class Graph extends Component{
 
   constructor(){
     super()
-    this.jData = JSON.parse(jsonData)
-    this.allData = this.jData.map( o => [ o.frame_number, o.intensity0, o.intensity1 ])
-    this.d2 = [[ 'Frame', 'Int-0', 'Int-1' ], [1,1,1]] 
+    this.allData = JSON.parse(jsonData).map( o => [o.frame_number, o.intensity0, o.intensity1] ) 
+    this.d2 = [['Frame','Int-0','Int-1'], [1,1,1]]  // dummy first data point to prevent initial chart data error
     this.di = 0
     this.state = { data: this.d2 }
-  }
-
- componentDidMount() {
     this.interval = setInterval(() => { 
-      if(this.di++ < this.jData.length) this.d2.push(this.allData[this.di])
+      if(this.di < this.allData.length) this.d2.push(this.allData[this.di++])
       else clearInterval(this.interval) 
       this.setState({ data: this.d2 })
-    }, 500);
+    },500)
   }
-  
-  componentWillUnmount() {
-    clearInterval(this.interval);
 
-  }
 
   render(){
     return(
