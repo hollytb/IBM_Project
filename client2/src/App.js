@@ -4,8 +4,8 @@ import React from "react";
 import ReactPlayer from 'react-player'
 import LeftPane from "./components/LeftPane.js";
 import Video from "./components/Video.js";
-import Footer from "./components/Footer.js";
-
+//import Footer from "./components/Footer.js";
+import Test from "./components/Test.js";
 //import './App.css';
 
 class App extends React.Component {
@@ -35,7 +35,8 @@ class App extends React.Component {
               <Video></Video>
             </div>
             <div class=" col-3 fixed-bottom">
-            <Footer test = {this.state.apiResponse}/>
+          
+          <Test test = {this.state.apiResponse}/>
             </div>      
             </div>
           
@@ -44,4 +45,4 @@ class App extends React.Component {
   }
 }
 export default App;
-
+//  <Footer test = {this.state.apiResponse}/>

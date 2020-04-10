@@ -1,4 +1,4 @@
-import React from "react";
+/*import React from "react";
 import { MDBFormInline } from 'mdbreact';
 import { MDBBtn } from "mdbreact";
 import { Container } from 'reactstrap';
@@ -35,22 +35,17 @@ import $ from "jquery";
           e.preventDefault();
         }
       }
+    
   });
-  
+
     //Enables functionality of "Select only one ROI" as default
 
-
-
-
-
-
-
-    
 
 
   $("#customSwitches").click(function(e){ // Multiple regions of interest able to be selected
      $(".region").prop('checked', false);
   }); 
+  
   return (
     <div className = "container"
      
@@ -63,25 +58,36 @@ import $ from "jquery";
     </label> 
     </div>
       <div>
-      <MDBBtn color="blue-grey" size="sm" variant="link"  onClick={() => setCurrentFrame(0)}>
+      <MDBBtn color="blue-grey" variant="link"  onClick={() => setCurrentFrame(0)}>
         reset
       </MDBBtn>
       </div>
       {currentFrame >= frames.length
         ? null
         : frames[currentFrame].map((roi, index) => (
+          
             <div key={roi}>
+          
               <label className ="label">
-                {`roi${index}`}
-                <input className ="region" type="radio" />
+            
+              <p classnName = "font-weight-bold">{`roi${index}`}</p>
+                <MDBFormInline>
+                
+                <input className ="region" id = "radio_btn" type="radio" />
+                
+        
+   
+              </MDBFormInline>  
               </label>
-            </div>        
+               
+            </div>  
+                
           ))}
     </div>
     </div>
   );
 };
-export default Footer;
+export default Footer;  */
 
 
 

@@ -3,7 +3,7 @@ import { render } from 'react-dom'
 import Chart from 'react-google-charts'
 import { jsonData } from './Output.js'
 
-class Graph extends Component{
+class Graph extends Component{ 
 
   constructor(){
     super()
@@ -15,7 +15,11 @@ class Graph extends Component{
       if(this.di < this.allData.length) this.d2.push(this.allData[this.di++])
       else clearInterval(this.interval) 
       this.setState({ data: this.d2 })
+<<<<<<< Updated upstream
     },500)
+=======
+    }, 30);
+>>>>>>> Stashed changes
   }
 
 
