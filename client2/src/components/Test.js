@@ -5,31 +5,34 @@
 import React from 'react';
 import $ from "jquery";
 
-var ROI = new Array(40);
-
 const Test = props => {
   const total_regions = (JSON.parse(JSON.stringify(props.test)).length); // gets the number of regions
-  for (var i = 0; i < total_regions.length; i++) {
-    ROI[i] = 0;
+  var ROI = [];
+  for (var i = 0; i < total_regions.length; i++) { // Array to represent which regions need to be displayed
+    ROI[i] = 0; // deault setting all regions equal 1 as must be displayed
   }
   //when a radio button is clicked change its corresponding in the array 
   const handleClick = (item, idx) => {
-  ROI[item] = 1;
-  console.log(`item ${item} with index ${idx} clicked`); // just checking if works when clicked 
-};
+    if(ROI[idx] == 1){ // if region displayed and clicked -> undisplay region 
+      ROI[idx] = 0; 
+    }else{ // if region not displayed and clicked -> display region 
+        ROI[idx] = 1; 
+    }
+    console.log(`Array ${ROI[idx]} with index ${idx} clicked`); // Used to test functionality of array 
+  };
+
   return (
     // displays radio buttons depending on the number of objects in json
     <div>
     {props.test.map((item, idx) => { 
       return (
         <label key={idx}>
-          <input className="region" type="radio" value={idx} onClick={() => handleClick(item, idx)} />
+          <input className="region" type="radio" value={idx} onClick={() => handleClick(item, idx)}/>
           <span>{idx}</span> 
         </label>
       );
-    })}
+    })}  
     </div>
-     
   );
 };
 export default Test;
