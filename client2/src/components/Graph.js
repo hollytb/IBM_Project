@@ -10,17 +10,18 @@ class Graph extends Component{
     this.allData = JSON.parse(jsonData).map( o => o.norm_times_series.map( a => a[0] ))
     console.log(this.allData)
   
-    this.numLines = this.allData.length
-    this.linesVisible = []
-    for(let i=0; i<this.numLines; i++) this.linesVisible[i] = true
-    this.d2 = []
-    this.di = 0
-    this.dmax = this.allData[0].length
-    this.state = { data: this.d2 }
+    this.numROIs = this.allData.length
+    this.ROIsVisible = []
+    for(let i=0; i<this.numROIs; i++) this.ROIsVisible[i] = true
+
+    this.currentData = []
+    this.currentFrame = 0
+    this.maxFrame = this.allData[0].length
+    this.state = { data: this.currentData }
 
     this.interval = setInterval(()=>{ 
-      if(this.di < this.dmax){
-        this.di++
+      if(this.currentFrame < this.maxFrame){
+        this.currentFrame++
         this.redraw()
       }
       else clearInterval(this.interval) 
@@ -28,23 +29,23 @@ class Graph extends Component{
   }
 
   redraw(){
-    this.d2=[]
+    this.currentData=[]
     let headers = ['Frame']
-    for(let line=0; line<this.numLines; line++) if(this.linesVisible[line]) headers.push('ROI'+line)
-    this.d2.push(headers)
+    for(let ROI=0; ROI<this.numROIs; ROI++) if(this.ROIsVisible[ROI]) headers.push('ROI'+ROI)
+    this.currentData.push(headers)
 
-    for(let i=0; i<this.di; i++){
-      let a = [i]
-      for(let line=0; line<this.numLines; line++) if(this.linesVisible[line]) a.push(this.allData[line][i])
-      this.d2.push(a)
+    for(let i=0; i<this.currentFrame; i++){
+      let intensities = [i]
+      for(let ROI=0; ROI<this.numROIs; ROI++) if(this.ROIsVisible[ROI]) intensities.push(this.allData[ROI][i])
+      this.currentData.push(intensities)
     }
 
-    this.setState({ data: this.d2 })
+    this.setState({ data: this.currentData })
   }
 
   toggle(i){
-    this.linesVisible[i] = !this.linesVisible[i]
-    console.log(this.linesVisible)
+    this.ROIsVisible[i] = !this.ROIsVisible[i]
+    console.log(this.ROIsVisible)
     this.redraw()
   }
   
