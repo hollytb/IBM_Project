@@ -3,7 +3,7 @@ import { render } from 'react-dom'
 import Chart from 'react-google-charts'
 import { jsonData } from './Output.js'
 
-export default class MyChart extends Component{
+class Graph extends Component{ 
 
   constructor(){
     super()
@@ -71,3 +71,4 @@ export default class MyChart extends Component{
      )
   }  
 }
+export default Graph;
