@@ -24,7 +24,7 @@ class Graph extends Component{
         this.redraw()
       }
       else clearInterval(this.interval) 
-    },1000)
+    },500)
   }
 
   redraw(){
@@ -57,6 +57,7 @@ class Graph extends Component{
           chartType='LineChart'
           data={ this.state.data }
           options={{ 
+            legend: { position: 'bottom' },
             hAxis: { title: 'Frame' }, 
             vAxis: {
               title: 'Intensity',
