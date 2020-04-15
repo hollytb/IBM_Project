@@ -86,6 +86,11 @@ class tracker:
 
             return rois, agg_intensities, spread_intensities
 
+    """
+      This function calculates the intensities
+      norm_time_series[Average,Average-Standard_deviation,Average+Standard_Deviation]
+    """
+
     def norm_time_series(self, rois, agg_intensities, spread_intensities):
         intensities = []
         for average, stand_dev in zip(agg_intensities, spread_intensities):
@@ -101,10 +106,22 @@ class tracker:
         return intensities
 
 
+"""
+Parses the json data
+
+"""
+
+
 def parse_json_data(json_input_file_name):
     f = open(json_input_file_name)
     json_input = json.load(f)
     return json_input
+
+
+"""
+Converts the data into a JSON file
+
+"""
 
 
 def convert_to_JSON_file(input_data0, input_data1):
@@ -127,6 +144,11 @@ def convert_to_JSON_file(input_data0, input_data1):
         f.close()
 
 
+"""
+This function adds the norm time series data to make the final JSON file
+"""
+
+
 def create_JSON_output(roi_number):
     output = {"short_name": "Demo", "roi_number": roi_number, "finding": "null",
               "dt": 0.1, "norm_times_series": [], "initial_location": [rois0[roi_number]]}
@@ -144,8 +166,8 @@ if __name__ == '__main__':
         cv2.rectangle(frame, (int(roi[0]), int(roi[1])), (int(
             roi[0]+roi[2]), int(roi[1]+roi[3])), (0, 250, 0))
 
-    # vidfile = input('Path to video:')
-    vidfile = os.path.abspath("M_03292018202006_00000000U2940605_1_001-1.MP4")
+    vidfile = input('Path to video:')
+    #vidfile = os.path.abspath("M_03292018202006_00000000U2940605_1_001-1.MP4")
     offset_ms = 70*1000
     frames_to_process = 500
     # Open the video file and fast forward to the offset
