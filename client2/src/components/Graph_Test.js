@@ -1,4 +1,4 @@
-import React from "react";
+/*import React from "react";
 import $ from "jquery";
 //<h1>{props.testing.map}</h1>
 const Graph_Test = (props) => {
@@ -22,4 +22,4 @@ const Graph_Test = (props) => {
     </div>
   );
 };
-export default Graph_Test;
+export default Graph_Test; */

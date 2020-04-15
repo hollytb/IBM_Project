@@ -48,9 +48,12 @@ class Graph extends Component{
     console.log(this.ROIsVisible)
     this.redraw()
   }
-  
+  // call props same way in grah_test but add this. infront
   render(){
-    return(
+    return(<div>
+      <div>
+        {this.props.arrays && this.props.arrays.length > 0 && <p>{this.props.arrays[0]}</p>}
+      </div>
       <div>
         <Chart
           width={'100%'}
@@ -69,6 +72,7 @@ class Graph extends Component{
         />
         <label><input id="roi0" type="checkbox" defaultChecked={true} onChange={e=>this.toggle(0)}/> ROI-0 </label><br/>
         <label><input id="roi1" type="checkbox" defaultChecked={true} onChange={e=>this.toggle(1)}/> ROI-1 </label>
+      </div>
       </div>
      )
   }  

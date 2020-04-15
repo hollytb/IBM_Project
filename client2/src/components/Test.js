@@ -2,7 +2,8 @@
 // This will be used in the graph component, and will enable the functionality of selcting one region or multiple region.
 // As the graph will be plotted based on which regions are noted 1 in the array 
 import $ from "jquery";
-import Graph_Test from "./Graph_Test.js";
+//import Graph_Test from "./Graph_Test.js";
+import Graph from "./Graph.js";
 import React, { useState } from "react";
 const Test = props => {
   const total_regions = (JSON.parse(JSON.stringify(props.test)).length); // gets the number of regions
@@ -19,11 +20,11 @@ const Test = props => {
     }
     setArray(newArray);
     };
-
     return (   // displays radio buttons depending on the number of objects in json
       <div>
         <div>
-          <Graph_Test  testing={[]} arrays={array}/>
+        
+          <Graph  testing={props.test} arrays={array}/>
         </div>
         <div>
           {props.test.map((item, idx) => { 

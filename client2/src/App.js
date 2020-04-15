@@ -6,6 +6,7 @@ import Video from "./components/Video.js";
 //import Footer from "./components/Footer.js";
 import Test from "./components/Test.js";
 import Graph_Test from "./components/Graph_Test.js";
+import Graph from "./components/Graph.js";
 //import './App.css';
 
 class App extends React.Component {
@@ -36,9 +37,7 @@ class App extends React.Component {
               <Video></Video>
             </div>
             <div class=" col-3 fixed-bottom">
-            <Test test = {this.state.apiResponse}/>
-            <Graph_Test testing = {this.state.apiResponse} arrays={[]}  />
-              
+              <Test test = {this.state.apiResponse}/>
             </div>      
             </div>
           
@@ -48,3 +47,4 @@ class App extends React.Component {
 }
 export default App;
 //  <Footer test = {this.state.apiResponse}/>
+//  <Graph_Test testing = {this.state.apiResponse} arrays={[]}  />

@@ -7,7 +7,7 @@ const LeftPane = () => {
 return (
     
       <Card class= "leftpane fixed-top fixed-bottom" > 
-        <Graph/>
+      
       </Card>
 
 ); 
