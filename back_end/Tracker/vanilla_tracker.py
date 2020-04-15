@@ -109,12 +109,22 @@ def parse_json_data(json_input_file_name):
 
 def convert_to_JSON_file(input_data0, input_data1):
     file_name = os.path.abspath("Output.json")
+    file_path2 = os.path.split(file_name)
+    file_path2 = os.path.split(file_path2[0])
+    file_path2 = os.path.split(file_path2[0])
+
+    file_path3 = os.path.join(
+        file_path2[0], "client2", "src", "components", "Output.json")
     with open(file_name, "w") as f:
         input0 = json.dumps(input_data0)
         input1 = json.dumps(input_data1)
         f.write(f"[{input0}, {input1}]")
         f.close()
-    return f
+    with open(file_path3, "w+") as f:
+        input0 = json.dumps(input_data0)
+        input1 = json.dumps(input_data1)
+        f.write(f"[{input0}, {input1}]")
+        f.close()
 
 
 def create_JSON_output(roi_number):
