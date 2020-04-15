@@ -24,67 +24,66 @@ class Graph extends Component {
       } else clearInterval(this.interval);
     }, 500);
   }
-
+  // The graph will be plotted based on which regions are noted 1 in the array 
   redraw() {
     this.currentData = [];
     let headers = ["Frame"];
     for (let ROI = 0; ROI < this.numROIs; ROI++)
-      if (this.props.arrays[ROI]) headers.push("ROI" + ROI);
+      if (this.props.regions_displayed[ROI]) headers.push("ROI" + ROI);
     this.currentData.push(headers);
 
     for (let i = 0; i < this.currentFrame; i++) {
       let intensities = [i];
       for (let ROI = 0; ROI < this.numROIs; ROI++)
-        if (this.props.arrays[ROI]) intensities.push(this.allData[ROI][i]);
+        if (this.props.regions_displayed[ROI]) intensities.push(this.allData[ROI][i]);
       this.currentData.push(intensities);
     }
 
     this.setState({ data: this.currentData });
   }
 
-  toggle(i) {
-    this.ROIsVisible[i] = !this.ROIsVisible[i];
-    console.log(this.ROIsVisible);
-    this.redraw();
-  }
   // call props same way in grah_test but add this. infront
   render() {
     return (
       <div>
         <div>
-          {this.props.arrays && this.props.arrays.length > 0 && (
-            <p>{this.props.arrays[0]}</p>
-          )}
-        </div>
-        <div>
           <Chart
-            width={"100%"}
-            height={"400px"}
+            width={"500px"}
+            height={"500px"}
             chartType="LineChart"
             data={this.state.data}
             options={{
+              chartArea: { width: '75%' },
               legend: { position: "bottom" },
-              hAxis: { title: "Frame" },
+              hAxis: { title: "Frame", 
+                titleTextStyle: {
+                color: "#777",
+                fontName: "sans-serif",
+                fontSize: 17,
+                bold: true,
+                italic: false
+            } 
+            },
               vAxis: {
                 title: "Intensity",
                 viewWindowMode: "explicit",
                 viewWindow: { min: -1, max: 200 },
+                  titleTextStyle: {
+                  color: "#777",
+                  fontName: "sans-serif",
+                  fontSize: 17,
+                  bold: true,
+                  italic: false
+              } 
+                
               },
             }}
           />
-          <br />
-          <label>
-            <input
-              id=""
-              type="radio"
-              defaultChecked={true}
-              onChange={(e) => this.toggle(1)}
-              visibility="hidden"
-            />{" "}
-          </label>
+          <br />     
         </div>
       </div>
     );
   }
 }
 export default Graph;
+

@@ -1,13 +1,10 @@
 import "bootstrap/dist/css/bootstrap.css";
 import React from "react";
 import ReactPlayer from 'react-player'
-import LeftPane from "./components/LeftPane.js";
 import Video from "./components/Video.js";
-//import Footer from "./components/Footer.js";
-import Test from "./components/Test.js";
-import Graph_Test from "./components/Graph_Test.js";
+import Select_Buttons from "./components/Select_Buttons.js";
 import Graph from "./components/Graph.js";
-//import './App.css';
+
 
 class App extends React.Component {
   constructor(props) {
@@ -28,23 +25,15 @@ class App extends React.Component {
   
   render() {
     return (
-      <div className="App">
-          <div class="row fixed-top fixed-bottom no-gutters"  >
-            <div class="col-3 fixed-top fixed-bottom">
-              <LeftPane></LeftPane>
-            </div>
-            <div class="offset-md-3 fixed-top fixed-bottom" >
-              <Video></Video>
-            </div>
-            <div class=" col-3 fixed-bottom">
-              <Test test = {this.state.apiResponse}/>
-            </div>      
-            </div>
-          
+      <div  className="App" class="row fixed-top fixed-bottom no-gutters"  >
+        <div class="col-3 fixed-top fixed-bottom">
+          <Select_Buttons tracker_ouput = {this.state.apiResponse}/>
+        </div>
+        <div class="offset-md-3 fixed-top fixed-bottom" >
+          <Video></Video>
+        </div>
       </div>
     );
   }
 }
 export default App;
-//  <Footer test = {this.state.apiResponse}/>
-//  <Graph_Test testing = {this.state.apiResponse} arrays={[]}  />

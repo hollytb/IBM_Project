@@ -1,30 +1,24 @@
-/*Styling here if not possibly through bootstrap*/
+/*Styling here*/
 body{
   height: 100%;
-  background-color: #FFFFFF;
+  background-color: #FFFFFF; /* White */
   overflow: hidden;
 }
-/* switch to turn of multiple region selection */
-#customSwitches{
+/*Video*/
+.react-player { 
+  position: absolute;
 }
-/* checkbox's in relation to regions */
+/*Check Box's*/
 .region{
-  clear: none;
-   width: auto;
+   width: 20px; height: 20px; 
+}
+/*Check Box Label's*/
+.region_labels{
+outline-style: ridge;
+outline-color: #7FFF00;
 }
 
-.leftpane{
-  background-color: #FFFFFF;
-  position: absolute;
-}
-.react-player {
-  position: absolute;
-}
-/* Footer */
-.container{ 
-  background-color: #FFFFFF;
 
-}
 
 
 
