@@ -88,7 +88,7 @@ class tracker:
 
     """
       This function calculates the intensities
-      norm_time_series[Average,Average-Standard_deviation,Average+Standard_Deviation]
+      norm_time_series[Average, Average - Standard_deviation, Average + Standard_Deviation]
     """
 
     def norm_time_series(self, rois, agg_intensities, spread_intensities):
@@ -96,6 +96,7 @@ class tracker:
         for average, stand_dev in zip(agg_intensities, spread_intensities):
             try:
                 if np.isnan(average) or np.isnan(stand_dev):
+                    # Use the value -1 to signify that the ROI went out of frame
                     intensities.append([-1, -1, -1])
                 else:
                     intensities.append(
@@ -107,7 +108,7 @@ class tracker:
 
 
 """
-Parses the json data
+Parses the json data by taking the file name of the json and returning a python object with the data
 
 """
 
@@ -119,25 +120,25 @@ def parse_json_data(json_input_file_name):
 
 
 """
-Converts the data into a JSON file
+Converts the data into a JSON file in the back end and puts it into the client side for the graph
 
 """
 
 
 def convert_to_JSON_file(input_data0, input_data1):
-    file_name = os.path.abspath("Output.json")
-    file_path2 = os.path.split(file_name)
-    file_path2 = os.path.split(file_path2[0])
-    file_path2 = os.path.split(file_path2[0])
+    back_end_file_name = os.path.abspath("Output.json")
+    temp_path = os.path.split(back_end_file_name)
+    temp_path = os.path.split(temp_path[0])
+    temp_path = os.path.split(temp_path[0])
 
-    file_path3 = os.path.join(
-        file_path2[0], "client2", "src", "components", "Output.json")
-    with open(file_name, "w") as f:
+    front_end_path = os.path.join(
+        temp_path[0], "client2", "src", "components", "Output.json")
+    with open(back_end_file_name, "w") as f:
         input0 = json.dumps(input_data0)
         input1 = json.dumps(input_data1)
         f.write(f"[{input0}, {input1}]")
         f.close()
-    with open(file_path3, "w+") as f:
+    with open(front_end_path, "w+") as f:
         input0 = json.dumps(input_data0)
         input1 = json.dumps(input_data1)
         f.write(f"[{input0}, {input1}]")
@@ -166,8 +167,8 @@ if __name__ == '__main__':
         cv2.rectangle(frame, (int(roi[0]), int(roi[1])), (int(
             roi[0]+roi[2]), int(roi[1]+roi[3])), (0, 250, 0))
 
-    vidfile = input('Path to video:')
-    #vidfile = os.path.abspath("M_03292018202006_00000000U2940605_1_001-1.MP4")
+    # vidfile = input('Path to video:')
+    vidfile = os.path.abspath("M_03292018202006_00000000U2940605_1_001-1.MP4")
     offset_ms = 70*1000
     frames_to_process = 500
     # Open the video file and fast forward to the offset
