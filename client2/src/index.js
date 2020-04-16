@@ -2,9 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import $ from "jquery"
-import 'jquery/dist/jquery.min.js'
+
+
 import './index.css';
 
 ReactDOM.render(<App />, document.getElementById('root'));

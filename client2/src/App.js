@@ -5,7 +5,6 @@ import Video from "./components/Video.js";
 import Select_Buttons from "./components/Select_Buttons.js";
 import Graph from "./components/Graph.js";
 
-
 class App extends React.Component {
   constructor(props) {
     super(props);

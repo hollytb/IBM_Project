@@ -1,7 +1,5 @@
 // When check buttons ticked, value in array is 1 if not ticked value is 0.
 // This dynamically changing array is used in the graph component and decides which regions are dislaped
-
-import $ from "jquery";
 import Graph from "./Graph.js";
 import React, { useState } from "react";
 import jsonData from "./Output.json"; // Json file automatically added to components, when vanilla_tracker.py ran
