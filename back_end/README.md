@@ -39,6 +39,9 @@ To run the react app just type:
 npm start
 ```
 
+## Video Demo
+![](Project-Demo.gif)
+
 ## License
 
 © Copyright IBM Corporation 2020.
