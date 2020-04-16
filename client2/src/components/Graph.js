@@ -22,9 +22,9 @@ class Graph extends Component {
         this.currentFrame++;
         this.redraw();
       } else clearInterval(this.interval);
-    }, 500);
+    }, 38);
   }
-  // The graph will be plotted based on which regions are noted 1 in the array 
+  // The graph will be plotted based on which regions are noted 1 in the array
   redraw() {
     this.currentData = [];
     let headers = ["Frame"];
@@ -35,7 +35,8 @@ class Graph extends Component {
     for (let i = 0; i < this.currentFrame; i++) {
       let intensities = [i];
       for (let ROI = 0; ROI < this.numROIs; ROI++)
-        if (this.props.regions_displayed[ROI]) intensities.push(this.allData[ROI][i]);
+        if (this.props.regions_displayed[ROI])
+          intensities.push(this.allData[ROI][i]);
       this.currentData.push(intensities);
     }
 
@@ -53,37 +54,36 @@ class Graph extends Component {
             chartType="LineChart"
             data={this.state.data}
             options={{
-              chartArea: { width: '75%' },
+              chartArea: { width: "75%" },
               legend: { position: "bottom" },
-              hAxis: { title: "Frame", 
+              hAxis: {
+                title: "Frame",
                 titleTextStyle: {
-                color: "#777",
-                fontName: "sans-serif",
-                fontSize: 17,
-                bold: true,
-                italic: false
-            } 
-            },
-              vAxis: {
-                title: "Intensity",
-                viewWindowMode: "explicit",
-                viewWindow: { min: -1, max: 200 },
-                  titleTextStyle: {
                   color: "#777",
                   fontName: "sans-serif",
                   fontSize: 17,
                   bold: true,
-                  italic: false
-              } 
-                
+                  italic: false,
+                },
+              },
+              vAxis: {
+                title: "Intensity",
+                viewWindowMode: "explicit",
+                viewWindow: { min: -1, max: 200 },
+                titleTextStyle: {
+                  color: "#777",
+                  fontName: "sans-serif",
+                  fontSize: 17,
+                  bold: true,
+                  italic: false,
+                },
               },
             }}
           />
-          <br />     
+          <br />
         </div>
       </div>
     );
   }
 }
 export default Graph;
-
