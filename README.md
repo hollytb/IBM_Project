@@ -39,6 +39,7 @@ python3 vanilla_tracker.py
 ### Video.mp4
 This video is screenrecorded from when the vanilla_tracker.py is run.
 Note it must be in your source folder of client2. 
+![3wusn4](https://user-images.githubusercontent.com/58475336/79441707-d9faa600-7fd7-11ea-9e71-9d0785c53eec.gif)
 
 ## License
 
