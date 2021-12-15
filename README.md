@@ -3,7 +3,7 @@
 The IBM Project for our part is a React app with backend python scrips.
 
 
-# Vide Demo
+# Video Demo
 ![3wusn4](https://user-images.githubusercontent.com/58475336/79441707-d9faa600-7fd7-11ea-9e71-9d0785c53eec.gif)
 
 # Running in order:
